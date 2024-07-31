@@ -7,15 +7,16 @@
 python app.py
  ```
  ![alt text](image.png)
+ <img src="./readmeImage/image.png" alt="説明文" width="600">
 
  2. 起動を確認したら、ブラウザで、<http://127.0.0.1:5000>にアクセスする
- ![alt text](image-1.png)
+<img src="./readmeImage/image-1.png" alt="説明文" width="600">
 
  3. ファイルを選択ボタンを押し、自分のフォルダから、モザイクを入れたい画像を選択
- ![alt text](image-2.png)
+<img src="./readmeImage/image-2.png" alt="説明文" width="600">
 
  4. 「画像を編集」ボタンを押下し、モザイク処理が完了する。
- ![alt text](image-3.png)
+<img src="./readmeImage/image-3.png" alt="説明文" width="600">
 
 
  ## アイデア備忘録
