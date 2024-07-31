@@ -6,7 +6,6 @@
  ```zsh
 python app.py
  ```
- ![alt text](image.png)
  <img src="./readmeImage/image.png" alt="説明文" width="600">
 
  2. 起動を確認したら、ブラウザで、<http://127.0.0.1:5000>にアクセスする
