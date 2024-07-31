@@ -1,3 +1,9 @@
+#自分で追加したgitignore
+static/images/
+.DS_Store
+
+#GitHubのpythonを選択したgitignore
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
