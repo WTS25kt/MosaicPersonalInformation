@@ -2,13 +2,12 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv
 from flask import Flask, request, render_template, send_from_directory
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw
 
 # .envファイルを読み込む
 load_dotenv()
 
 # 環境変数からパスを取得
-font_path = os.getenv('FONT_PATH')
 save_directory = os.getenv('SAVE_DIRECTORY')
 
 # Flaskアプリケーションの設定
@@ -24,16 +23,23 @@ def upload_image():
     if image_file:
         image_path = os.path.join(save_directory, image_file.filename)
         image_file.save(image_path)
-        edited_image_path = add_black_rectangle(image_path)
+        edited_image_path = add_half_black_rectangle(image_path)
         return send_from_directory(save_directory, edited_image_path)
 
-def add_black_rectangle(image_path):
+def add_half_black_rectangle(image_path):
     with Image.open(image_path) as image:
         draw = ImageDraw.Draw(image)
-        # 黒塗りの四角を追加（位置とサイズは適宜調整）
-        rectangle_x0, rectangle_y0 = 50, 50
-        rectangle_x1, rectangle_y1 = 200, 200
-        draw.rectangle([rectangle_x0, rectangle_y0, rectangle_x1, rectangle_y1], fill="black")
+        width, height = image.size
+        # 画像の中心に小さい四角形を残し、外側を黒塗り
+        margin = 0.25  # 内側の四角形のサイズを調整する割合
+        inner_x0, inner_y0 = width * margin, height * margin
+        inner_x1, inner_y1 = width * (1 - margin), height * (1 - margin)
+        
+        # 全体を黒塗り
+        draw.rectangle([0, 0, width, height], fill='black')
+        # 内側の四角形を透明にする
+        draw.rectangle([inner_x0, inner_y0, inner_x1, inner_y1], fill=None)
+        
         edited_image_path = f"edited_{Path(image_path).name}"
         save_path = os.path.join(save_directory, edited_image_path)
         image.save(save_path)
